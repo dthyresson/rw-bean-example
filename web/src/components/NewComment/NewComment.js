@@ -10,7 +10,7 @@ const CREATE_COMMENT_MUTATION = gql`
   }
 `
 
-const NewComment = () => {
+const NewComment = ({ beanId }) => {
   const { addMessage } = useFlash()
   const [createComment, { loading, error }] = useMutation(
     CREATE_COMMENT_MUTATION,
@@ -23,7 +23,9 @@ const NewComment = () => {
   )
 
   const onSave = (input) => {
-    const castInput = Object.assign(input, { beanId: parseInt(input.beanId) })
+    const castInput = Object.assign(input, {
+      beanId: parseInt(input.beanId || beanId),
+    })
     createComment({ variables: { input: castInput } })
   }
 
@@ -33,7 +35,12 @@ const NewComment = () => {
         <h2 className="rw-heading rw-heading-secondary">New Comment</h2>
       </header>
       <div className="rw-segment-main">
-        <CommentForm onSave={onSave} loading={loading} error={error} />
+        <CommentForm
+          beanId={beanId}
+          onSave={onSave}
+          loading={loading}
+          error={error}
+        />
       </div>
     </div>
   )

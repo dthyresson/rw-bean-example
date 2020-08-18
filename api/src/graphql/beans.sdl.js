@@ -9,6 +9,7 @@ export const schema = gql`
 
   type Query {
     beans: [Bean!]!
+    bean(id: Int!): Bean
   }
 
   input CreateBeanInput {
@@ -23,5 +24,7 @@ export const schema = gql`
 
   type Mutation {
     createBean(input: CreateBeanInput!): Bean!
+    updateBean(id: Int!, input: UpdateBeanInput!): Bean!
+    deleteBean(id: Int!): Bean!
   }
 `

@@ -4,14 +4,12 @@ import {
   FieldError,
   Label,
   TextField,
-  NumberField,
   Submit,
 } from '@redwoodjs/forms'
 
-const CommentForm = (props) => {
-  const beanId = props.beanId
+const BeanForm = (props) => {
   const onSubmit = (data) => {
-    props.onSave(data, props?.comment?.id)
+    props.onSave(data, props?.bean?.id)
   }
 
   return (
@@ -33,32 +31,13 @@ const CommentForm = (props) => {
         </Label>
         <TextField
           name="body"
-          defaultValue={props.comment?.body}
+          defaultValue={props.bean?.body}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
         <FieldError name="body" className="rw-field-error" />
 
-        {beanId === undefined && (
-          <>
-            <Label
-              name="beanId"
-              className="rw-label"
-              errorClassName="rw-label rw-label-error"
-            >
-              Bean id
-            </Label>
-            <NumberField
-              name="beanId"
-              defaultValue={props.comment?.beanId}
-              className="rw-input"
-              errorClassName="rw-input rw-input-error"
-              validation={{ required: true }}
-            />
-            <FieldError name="beanId" className="rw-field-error" />
-          </>
-        )}
         <Label
           name="username"
           className="rw-label"
@@ -68,7 +47,7 @@ const CommentForm = (props) => {
         </Label>
         <TextField
           name="username"
-          defaultValue={props.comment?.username}
+          defaultValue={props.bean?.username}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
@@ -85,4 +64,4 @@ const CommentForm = (props) => {
   )
 }
 
-export default CommentForm
+export default BeanForm

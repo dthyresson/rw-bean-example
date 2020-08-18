@@ -4,17 +4,29 @@ export const beans = () => {
   return db.bean.findMany()
 }
 
-export const createBean = ({ input }) => {
-  console.log(input)
-
-  const bean = db.bean.create({
-    data: {
-      ...input,
-    },
+export const bean = ({ id }) => {
+  return db.bean.findOne({
+    where: { id },
   })
+}
 
-  console.log(bean)
-  return bean
+export const createBean = ({ input }) => {
+  return db.bean.create({
+    data: input,
+  })
+}
+
+export const updateBean = ({ id, input }) => {
+  return db.bean.update({
+    data: input,
+    where: { id },
+  })
+}
+
+export const deleteBean = ({ id }) => {
+  return db.bean.delete({
+    where: { id },
+  })
 }
 
 export const Bean = {
